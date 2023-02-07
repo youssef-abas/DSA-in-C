@@ -25,7 +25,12 @@ int QUEUEempty()
 
 void QUEUEput(Item x)
 {
-    link t = malloc(sizeof *t);
+    link t;
+    if ((t = malloc(sizeof *t)) == NULL)
+    {
+        QUEUEerror();
+        return;
+    }
     t->data = x;
     t->next = NULL;
 
@@ -39,6 +44,11 @@ void QUEUEput(Item x)
 
 Item QUEUEget()
 {
+    if (QUEUEempty())
+    {
+        QUEUEerror;
+        return NULL;
+    }
     link t = front.next;
     Item x = t->data;
 
@@ -50,6 +60,12 @@ Item QUEUEget()
 
     free(t);
     return x;
+}
+
+int QUEUEerror()
+{
+    fprintf(stderr, "Either no free space or queue is empty");
+    return -1;
 }
 
 void QUEUEprint()
