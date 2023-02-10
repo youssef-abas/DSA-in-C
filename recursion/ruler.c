@@ -3,6 +3,7 @@
 #include <math.h>
 
 void draw_rule(int, int, int);
+void draw_rule_iter(int, int, int);
 void mark(int, int);
 
 void print_dash(int);
@@ -10,7 +11,7 @@ void print_dash(int);
 int main(int argc, char **argv)
 {
     // system("clear");
-    draw_rule(0, (int)pow(2, atoi(argv[1])), atoi(argv[1]));
+    draw_rule_iter(0, (int)pow(2, atoi(argv[1])), atoi(argv[1]));
     // fflush(stdout);
     // while (1)
     //     ;
@@ -35,12 +36,18 @@ void draw_rule(int start, int end, int r)
     draw_rule(mid, end, r - 1);
 }
 
-// void draw_rule_iter(int start, int end, int r)
-// {
-//     for(int i = 1; i <= r; i++){
-//         for(int j = )
-//     }
-// }
+void draw_rule_iter(int start, int end, int r)
+{
+    int i, j, t;
+
+    for (t = 1, j = 1; t <= r; j += j, t++)
+    {
+        for (i = 0; i + j + t <= end; i += j + j)
+        {
+            mark(i + j + start, t);
+        }
+    }
+}
 
 void print_dash(int n)
 {
