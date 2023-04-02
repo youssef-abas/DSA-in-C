@@ -21,6 +21,23 @@ void insertion_sort(int *arr, int len, int dec)
     }
 }
 
+void insertion_sort_r(int *arr, int n)
+{
+    if (n > 1)
+    {
+        int unsorted = arr[n - 1];
+        insertion_sort_r(arr, n - 1);
+
+        int i = n - 2;
+        while (i >= 0 && arr[i] > unsorted)
+        {
+            arr[i + 1] = arr[i];
+            i--;
+        }
+        arr[i + 1] = unsorted;
+    }
+}
+
 void selection_sort(int *arr, int len)
 {
     for (int i = 0; i < len; i++)
@@ -93,7 +110,7 @@ int main()
 {
     int arr[] = {-35, 12, 122, 912, -1004, 0, 43, 1, 2, 3, -1};
 
-    merge_sort(arr, 0, 10);
+    insertion_sort_r(arr, 11);
 
     for (int i = 0; i < 11; i++)
     {
